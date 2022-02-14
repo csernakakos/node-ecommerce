@@ -1,8 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const app = express();
 app.use(cors());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/", (req, res) => {
     res.send(`
@@ -18,33 +20,9 @@ app.get("/", (req, res) => {
     `);
 });
 
-// My custom URL parser middleware
-function bodyParser(req, res, next){
-    if (req.method === "POST") {
-        req.on("data", data => {
-            const parsed = data.toString("utf8").split("&");
-            const formData = {};
-            for (let pair of parsed) {
-                const [key, value] = pair.split("=");
-                formData[key] = value;
-            }
-            req.body = formData;
-            next();
-        });
 
-    } else {
-        next();
-    }
-};
 
-// Let's run yet another middleware:
-function helloFromMiddleware(req, res, next){
-    console.log("Hello from middleware!");
-    next();
-};
-
-// Using data from middleware
-app.post("/", bodyParser, helloFromMiddleware, (req, res) => {
+app.post("/", (req, res) => {
     console.log(req.body);
     res.send("Signed up!")
 });
