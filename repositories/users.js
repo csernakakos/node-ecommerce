@@ -50,7 +50,6 @@ class UsersRepository {
         const hashedPwFromLoginSessionBuff = await scrypt(pwFromLoginSession, salt, 64);
 
         return hashed === hashedPwFromLoginSessionBuff.toString("hex");
-
     }
 
     async writeAll(records){

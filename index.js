@@ -4,8 +4,9 @@ const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const usersRepo = require("./repositories/users");
 const { comparePasswords } = require("./repositories/users");
+const dotenv = require("dotenv");
 
-
+const port = process.env.PORT || 3020;
 const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -81,4 +82,4 @@ app.post("/signin", async (req, res) => {
     res.send("You're signed in.")
 });
 
-app.listen(3020, () => {console.log("running!")});
+app.listen(port, () => {console.log(`running! on ${port}.`)});
