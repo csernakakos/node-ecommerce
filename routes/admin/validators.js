@@ -3,6 +3,8 @@ const usersRepo = require("../../repositories/users");
 
 
 module.exports = {
+    requireTitle: check("title").trim().isLength({min: 3, max: 40}).withMessage("Between 3 and 40 characters"),
+    requirePrice: check("price").trim().toFloat().isFloat({min: 1}).withMessage("Must be at least 1."),
     requireEmail:
     check("email")
         .trim()
