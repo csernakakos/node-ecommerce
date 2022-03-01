@@ -34,7 +34,7 @@ module.exports = class Repository {
         await fs.promises.writeFile(this.filename, JSON.stringify(records, null, 2));
     }
 
-    generateId(){
+    randomId(){
         return "_" + crypto.randomBytes(4).toString("hex");
     }
 

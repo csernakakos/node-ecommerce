@@ -3,9 +3,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const authRouter = require("./routes/admin/auth");
-const productsRouter = require("./routes/admin/products")
-// const { comparePasswords } = require("./repositories/users");
-// const dotenv = require("dotenv");
+const adminProductsRouter = require("./routes/admin/products")
+const productsRouter = require("./routes/products");
+const cartsRouter = require("./routes/carts");
 
 const port = process.env.PORT || 3020;
 
@@ -18,7 +18,9 @@ app.use(cookieSession({
 }));
 
 app.use(authRouter);
+app.use(adminProductsRouter);
 app.use(productsRouter);
+app.use(cartsRouter);
 
 
 
